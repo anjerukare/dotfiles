@@ -10,12 +10,10 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]]
+vim.api.nvim_create_autocmd('BufWritePost', {
+    pattern = 'plugins.lua',
+    command = 'source <afile> | PackerCompile'
+})
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
@@ -27,7 +25,7 @@ end
 packer.init {
   display = {
     open_fn = function()
-      return require("packer.util").float { border = "none" }
+      return require("packer.util").float { border = "single" }
     end,
   },
 }
@@ -37,20 +35,51 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- Utility and appearance plugins
-  use { 'luukvbaal/nnn.nvim', config = require 'plugins.nnn' }
-  use { 'windwp/nvim-autopairs', config = require 'plugins.autopairs' }
-  use { 'numToStr/Comment.nvim', config = require('Comment').setup() }
-  use { 'nvim-lualine/lualine.nvim', config = require 'plugins.lualine' }
-  use { 'crispgm/nvim-tabline', config = require('tabline').setup {} }
+  use {
+    'luukvbaal/nnn.nvim',
+    config = function() require 'plugins.nnn' end
+  }
+  use {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.0',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function() require 'plugins.telescope' end
+  }
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make'
+  }
+  use {
+    'windwp/nvim-autopairs',
+    config = function() require 'plugins.autopairs' end
+  }
+  use {
+    'numToStr/Comment.nvim',
+    config = function() require('Comment').setup() end
+  }
+  use {
+    'nvim-lualine/lualine.nvim',
+    config = function() require 'plugins.lualine' end
+  }
+  use {
+    'crispgm/nvim-tabline',
+    config = function() require('tabline').setup {} end
+  }
 
   -- Languages & frameworks plugins
   use 'neovim/nvim-lspconfig'
   use 'dart-lang/dart-vim-plugin'
-  use 'nvim-lua/plenary.nvim'
-  use { 'akinsho/flutter-tools.nvim', config = require 'plugins.flutter-tools' }
+  use {
+    'akinsho/flutter-tools.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function() require 'plugins.flutter-tools' end
+  }
 
   -- Autocompletion
-  use { 'hrsh7th/nvim-cmp', config = require 'plugins.autocompletion' }
+  use {
+    'hrsh7th/nvim-cmp',
+    config = function() require 'plugins.autocompletion' end
+  }
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
