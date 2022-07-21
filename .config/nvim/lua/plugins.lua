@@ -49,6 +49,7 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make'
   }
+  use 'nvim-telescope/telescope-ui-select.nvim'
   use {
     'windwp/nvim-autopairs',
     config = function() require 'plugins.autopairs' end
@@ -62,8 +63,8 @@ return require('packer').startup(function(use)
     config = function() require 'plugins.lualine' end
   }
   use {
-    'crispgm/nvim-tabline',
-    config = function() require('tabline').setup {} end
+    'nanozuki/tabby.nvim',
+    config = function() require 'plugins.tabline' end
   }
 
   -- Languages & frameworks plugins

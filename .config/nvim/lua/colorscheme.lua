@@ -7,24 +7,21 @@ if not status_ok then
 end
 
 --- Extension of set colorscheme
+-- Relink several highlight groups
+vim.cmd 'highlight! link Typedef Keyword'
+vim.cmd 'highlight! link StorageClass Keyword'
+
 -- Transparent bg
-vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'Normal', { bg = 'none', ctermfg = 251 })
 -- Transparent bg of floating windows
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 
 -- Spelling highlight overwrite
--- When Neovim will be updated to 0.9 it likely will have guisp key in
--- vim.api.nvim_set_hl (but not now on 7.0)
--- * then vim.highlight.create will be deleted
--- * use vim.api.nvim_set_hl instead
-vim.highlight.create('SpellBad', { cterm = 'undercurl', ctermfg = 'none',
-  guisp = '#767676' })
-vim.highlight.create('SpellCap', { cterm = 'undercurl', ctermfg = 'none',
-  guisp = '#767676' })
-vim.highlight.create('SpellRare', { cterm = 'undercurl', ctermfg = 'none',
-  guisp = '#767676' })
-vim.highlight.create('SpellLocal', { cterm = 'undercurl', ctermfg = 'none',
-  guisp = '#767676' })
+vim.api.nvim_set_hl(0, 'SpellBad', { undercurl = true, fg = 'none',
+  sp = '#767676' })
+vim.cmd 'highlight! link SpellCap SpellBad'
+vim.cmd 'highlight! link SpellRare SpellBad'
+vim.cmd 'highlight! link SpellLocal SpellBad'
 
 -- Cursor line
 vim.api.nvim_set_hl(0, 'CursorLine', {})
@@ -45,17 +42,17 @@ vim.api.nvim_set_hl(0, 'TabLineFill', { ctermbg = 'none' })
 
 -- Diagnostic colors
 vim.api.nvim_set_hl(0, 'DiagnosticError', { ctermfg = 168 })
-vim.highlight.create('DiagnosticUnderlineError', { cterm = 'undercurl',
-  guisp = '#d75f87' })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { undercurl = true,
+  sp = '#d75f87' })
 
 vim.api.nvim_set_hl(0, 'DiagnosticInfo', { ctermfg = 243 })
-vim.highlight.create('DiagnosticUnderlineInfo', { cterm = 'undercurl',
-  guisp = '#767676' })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { undercurl = true,
+  sp = '#767676' })
 
 vim.api.nvim_set_hl(0, 'DiagnosticHint', { ctermfg = 243 })
-vim.highlight.create('DiagnosticUnderlineHint', { cterm = 'undercurl',
-  guisp = '#767676' })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { undercurl = true,
+  sp = '#767676' })
 
 vim.api.nvim_set_hl(0, 'DiagnosticWarn', { ctermfg = 243 })
-vim.highlight.create('DiagnosticUnderlineWarn', { cterm = 'undercurl',
-  guisp = '#767676' })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { undercurl = true,
+  sp = '#767676' })

@@ -4,6 +4,9 @@ vim.g.mapleader = ','
 -- Easy quit
 vim.keymap.set('n', '<leader>q', '<cmd>quit<CR>', { silent = true })
 
+-- Easy quit from command-line
+vim.keymap.set('c', ':', '<C-c>', { silent = true })
+
 -- Clear highlights
 vim.keymap.set('n', '<leader>h', '<cmd>nohlsearch<CR>', { silent = true })
 

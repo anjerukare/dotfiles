@@ -2,11 +2,11 @@
 local builtin = require("nnn").builtin
 
 require('nnn').setup {
-  replace_netrw = 'picker',
+  -- replace_netrw = 'picker',
   mappings = {
     { "<C-t>", builtin.open_in_tab },     -- open file(s) in tab
     { "<C-s>", builtin.open_in_split },   -- open file(s) in split
-    { "<C-v>", builtin.open_in_vsplit },  -- open file(s) in vertsplit
+    { "<C-v>", builtin.open_in_vsplit }   -- open file(s) in vertsplit
   }
 }
 
