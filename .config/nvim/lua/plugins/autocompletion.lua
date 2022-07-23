@@ -1,30 +1,42 @@
 -- Use popup menu to show possible completions when there is one or more
 -- matches, don't select matches - force user to do it
-vim.opt.completeopt = {"menu", "menuone", "noselect"}
+vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
 -- Nvim cmp setup
-local cmp = require("cmp")
+local cmp = require('cmp')
+local luasnip = require('luasnip')
 
 cmp.setup({
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   mapping = {
-    ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
-    ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-e>"] = cmp.mapping.abort(),
-    ["<c-y>"] = cmp.mapping(
-      cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Insert,
-        select = true,
-      },
-      { "i", "c" }
-    ),
-    ["<c-space>"] = cmp.mapping {
+    ['<C-n>'] = cmp.mapping.select_next_item {
+      behavior = cmp.SelectBehavior.Insert
+    },
+    ['<C-p>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's', 'c' }),
+    ['<C-y>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true }
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's', 'c' }),
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),
+    ['<c-space>'] = cmp.mapping {
       i = cmp.mapping.complete(),
       c = function(_)
         if cmp.visible() then
@@ -35,18 +47,24 @@ cmp.setup({
           cmp.complete()
         end
       end,
-    },
-    ["<c-q>"] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
     }
   },
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'nvim_lsp' },
   }, {
     { name = 'buffer' },
-  })
+  }),
+  window = {
+    completion = {
+      border = 'single',
+      winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None'
+    },
+    documentation = {
+      border = 'single',
+      winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None'
+    }
+  }
 })
 
 cmp.setup.cmdline('/', {

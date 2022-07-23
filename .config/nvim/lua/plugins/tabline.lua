@@ -8,7 +8,7 @@ local hl_tabline_fill = 'TabLineFill'
 local function tab_label(tabid)
   local number = vim.api.nvim_tabpage_get_number(tabid)
   local name = tab.get_name(tabid)
-  return string.format('  %d: %s ', number, name)
+  return string.format('  %d] %s ', number, name)
 end
 
 require('tabby').setup {
