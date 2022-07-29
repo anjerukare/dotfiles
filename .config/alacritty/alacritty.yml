@@ -1,0 +1,27 @@
+env:
+  TERM: alacritty
+
+window:
+  dimensions:
+    columns: 85
+    lines: 22
+  padding:
+    x: 10
+    y: 10
+  decorations: none
+  opacity: 0.9
+
+font:
+  normal:
+    family: Ubuntu Mono
+  size: 13
+  offset:
+    y: 3
+
+colors:
+  primary:
+    background: '#0f0708'
+    foreground: '#d0cccd'
+
+shell:
+  program: /usr/bin/zsh
