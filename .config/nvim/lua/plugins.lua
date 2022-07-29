@@ -75,6 +75,7 @@ return require('packer').startup(function(use)
     requires = 'nvim-lua/plenary.nvim',
     config = function() require 'plugins.flutter-tools' end
   }
+  use 'mfussenegger/nvim-jdtls'
 
   -- Autocompletion
   use {

@@ -1,9 +1,6 @@
 -- Set leader key
 vim.g.mapleader = ','
 
--- Easy quit
-vim.keymap.set('n', '<leader>q', '<cmd>quit<CR>', { silent = true })
-
 -- Easy quit from command-line
 vim.keymap.set('c', ':', '<C-c>', { silent = true })
 
@@ -21,6 +18,10 @@ vim.keymap.set({ 'n', 'x', 'o' }, 'i', 'l', { silent = true })
 -- Insert and insert at beginning of line
 vim.keymap.set('n', 't', 'i', { silent = true })
 vim.keymap.set('n', 'T', 'I', { silent = true })
+
+-- Till
+vim.keymap.set({ 'n', 'v' }, 'l', 't', { silent = true })
+vim.keymap.set({ 'n', 'v' }, 'L', 'T', { silent = true })
 
 -- End of word
 vim.keymap.set({ 'n', 'x', 'o' }, 'k', 'e', { silent = true })

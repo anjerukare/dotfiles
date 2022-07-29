@@ -13,7 +13,9 @@ require('lualine').setup {
     disabled_filetypes = { 'NvimTree' }
   },
   sections = {
-    lualine_b = {'branch', 'diff',
+    lualine_b = {
+      'branch',
+      'diff',
       {
         'diagnostics',
         diagnostics_color = {
@@ -25,7 +27,18 @@ require('lualine').setup {
         },
         symbols = {error = " ", warn = " ", info = " ", hint = " "}
       }
-    }
+    },
+    lualine_c = {
+      {
+        'filename',
+        symbols = {
+          modified = '*',
+          readonly = ' [readonly]'
+        }
+      }
+    },
+    lualine_x = {},
+    lualine_y = {}
   }
 }
 

@@ -1,5 +1,7 @@
 -- This capabilities requires nvim-cmp plugin
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- Disable snippets because they loads slow
+capabilities.textDocument.completion.completionItem.snippetSupport = false;
 
 -- Set time that affects CursorHold event
 vim.o.updatetime = 500
