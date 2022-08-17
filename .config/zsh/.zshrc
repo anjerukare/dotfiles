@@ -4,8 +4,8 @@ unsetopt nomatch
 setopt menucomplete
 # Disable Ctrl-S to freeze terminal
 stty stop undef
-# Disable highlight on pasted text
-zle_highlight=('paste:none')
+# Disable highlight on pasted text and add highlight on selection
+zle_highlight=('paste:none', 'region:bg=168,fg=251')
 # Initialize autocompletion
 autoload -Uz compinit
 compinit
@@ -28,6 +28,110 @@ function zsh_add_plugin() {
     git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
   fi
 }
+
+### Vi mode
+bindkey -v
+# Delete characters with <Backspace> no matter when they were inserted
+bindkey '^?' backward-delete-char
+
+# Left, down, up, right
+bindkey -M vicmd 'm' vi-backward-char
+bindkey -M vicmd 'n' down-line-or-history
+bindkey -M vicmd 'e' up-line-or-history
+bindkey -M vicmd 'i' vi-forward-char
+
+# Insert and insert at beginning of line
+bindkey -M vicmd 't' vi-insert
+bindkey -M vicmd 'T' vi-insert-bol
+
+# Till
+bindkey -M vicmd 'l' vi-find-next-char-skip
+bindkey -M vicmd 'L' vi-find-prev-char-skip
+
+# End of word
+bindkey -M vicmd 'k' vi-forward-word-end
+
+# Handy escape from insert mode
+bindkey -M viins 'ii' vi-cmd-mode
+
+## Fix vi combination
+# Unbind all bindings that starts with i in visual mode
+# Found keys here: github.com/zsh-users/zsh/blob/master/Src/Zle/zle_keymap.c
+# in default bindings function
+bindkey -M visual -r 'iw'
+bindkey -M visual -r 'iW'
+bindkey -M visual -r 'ia'
+
+# Define widgets that go into visual-mode and select word
+visual-select-in-word() { zle visual-mode; zle select-in-word }
+zle -N visual-select-in-word
+visual-select-in-blank-word() { zle visual-mode; zle select-in-blank-word }
+zle -N visual-select-in-blank-word
+visual-select-in-shell-word() { zle visual-mode; zle select-in-shell-word }
+zle -N visual-select-in-shell-word
+
+# Bind it for command mode
+bindkey -M vicmd 'viw' visual-select-in-word
+bindkey -M vicmd 'viW' visual-select-in-blank-word
+bindkey -M vicmd 'via' visual-select-in-shell-word
+
+## Vi cursor style based on current mode
+zle-keymap-select() {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[2 q'
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[6 q'
+  fi
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne '\e[6 q'
+}
+zle -N zle-line-init
+echo -ne '\e[6 q' # Use beam shape cursor on startup
+preexec() { echo -ne '\e[6 q'; } # Use beam shape cursor for each new prompt
+
+## Use system clipboard then yanking and pasting
+# Reference: unix.stackexchange.com/a/390523
+xsel-wrap-widgets() {
+    local copy_or_paste=$1
+    shift
+
+    for widget in $@; do
+        if [[ $copy_or_paste == "copy" ]]; then
+            eval "
+            function _xsel-wrapped-$widget() {
+                zle .$widget
+                printf '%s' \$CUTBUFFER | xsel -ib
+            }
+            "
+        else
+            eval "
+            function _xsel-wrapped-$widget() {
+                CUTBUFFER=\$(xsel -ob)
+                zle .$widget
+            }
+            "
+        fi
+
+        zle -N $widget _xsel-wrapped-$widget
+    done
+}
+
+local copy_widgets=(
+    vi-yank vi-yank-eol vi-delete vi-backward-kill-word vi-change-whole-line
+)
+local paste_widgets=(
+    vi-put-{before,after}
+)
+
+xsel-wrap-widgets copy $copy_widgets
+xsel-wrap-widgets paste $paste_widgets
 
 ## Plugins
 # goes here

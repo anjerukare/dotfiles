@@ -25,3 +25,7 @@ colors:
 
 shell:
   program: /usr/bin/zsh
+
+key_bindings:
+  - { key: F, mods: Control, action: ScrollLineDown }
+  - { key: B, mods: Control, action: ScrollLineUp }
