@@ -59,7 +59,7 @@ require('flutter-tools').setup {
 -- Configuration for documentation float window
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
   vim.lsp.handlers.hover,
-  { border = 'single', height = 24 }
+  { border = 'single', max_height = 16 }
 )
 
 -- Icon signs (used mostly cuz it has little space character)
