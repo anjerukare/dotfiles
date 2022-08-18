@@ -50,6 +50,7 @@ bindkey -M vicmd 'L' vi-find-prev-char-skip
 
 # End of word
 bindkey -M vicmd 'k' vi-forward-word-end
+bindkey -M visual 'k' vi-forward-word-end
 
 # Handy escape from insert mode
 bindkey -M viins 'ii' vi-cmd-mode
