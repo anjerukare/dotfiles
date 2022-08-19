@@ -23,8 +23,9 @@ vim.keymap.set('n', 'T', 'I', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 'l', 't', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 'L', 'T', { silent = true })
 
--- End of word
+-- Semantic end of word, end of word
 vim.keymap.set({ 'n', 'x', 'o' }, 'k', 'e', { silent = true })
+vim.keymap.set({ 'n', 'x', 'o' }, 'K', 'E', { silent = true })
 
 -- Next match, previous match
 vim.keymap.set({ 'n', 'x', 'o' }, 'h', 'n', { silent = true })
