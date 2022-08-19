@@ -27,5 +27,25 @@ shell:
   program: /usr/bin/zsh
 
 key_bindings:
-  - { key: F, mods: Control, action: ScrollLineDown }
-  - { key: B, mods: Control, action: ScrollLineUp }
+  ## Vi mode
+  - { key: I, mods: Control, mode: ~Search, action: ToggleViMode }
+  # Left, down, up, right
+  - { key: M, mode: Vi|~Search, action: Left }
+  - { key: N, mode: Vi|~Search, action: Down }
+  - { key: E, mode: Vi|~Search, action: Up }
+  - { key: I, mode: Vi|~Search, action: Right }
+  # Insert
+  - { key: T, mode: Vi|~Search, action: ToggleViMode }
+  - { key: T, mode: Vi|~Search, action: ScrollToBottom }
+  # Semantic word end, word end
+  - { key: K, mode: Vi|~Search, action: SemanticRightEnd }
+  - { key: K, mods: Shift, mode: Vi|~Search, action: WordRightEnd }
+  # Next match, previous match
+  - { key: H, mode: Vi|~Search, action: SearchNext }
+  - { key: H, mods: Shift, mode: Vi|~Search, action: SearchPrevious }
+  
+  # Fix <Shift> + number bindings
+  # Scan codes are not consistent so they may have to be changed
+  - { key: 5, mods: Shift, mode: Vi|~Search, action: Last }
+  - { key: 7, mods: Shift, mode: Vi|~Search, action: FirstOccupied }
+  - { key: 6, mods: Shift, mode: Vi|~Search, action: Bracket }
