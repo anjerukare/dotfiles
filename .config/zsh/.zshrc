@@ -48,9 +48,15 @@ bindkey -M vicmd 'T' vi-insert-bol
 bindkey -M vicmd 'l' vi-find-next-char-skip
 bindkey -M vicmd 'L' vi-find-prev-char-skip
 
-# End of word
+# Semantic end of word, end of word
 bindkey -M vicmd 'k' vi-forward-word-end
 bindkey -M visual 'k' vi-forward-word-end
+bindkey -M vicmd 'K' vi-forward-blank-word-end
+bindkey -M visual 'K' vi-forward-blank-word-end
+
+# Next match, previous match
+bindkey -M vicmd 'h' history-search-backward
+bindkey -M vicmd 'H' history-search-forward
 
 # Handy escape from insert mode
 bindkey -M viins 'ii' vi-cmd-mode
