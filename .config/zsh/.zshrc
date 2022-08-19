@@ -149,7 +149,7 @@ HISTFILE="$HOME/.local/share/zsh/history"
 [ ! -f $HISTFILE ] && mkdir -p $(dirname $HISTFILE) && touch $HISTFILE
 HISTSIZE=1000
 SAVEHIST=1000
-export MANPAGER='nvim +Man!'
+export PAGER='less'
 
 ## Aliases
 alias v='nvim'
