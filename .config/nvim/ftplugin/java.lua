@@ -63,10 +63,10 @@ vim.api.nvim_create_autocmd("CursorHold", {
 })
 
 -- Auto fold imports
-vim.bo.foldmethod = 'expr'
+vim.wo.foldmethod = 'expr'
 vim.cmd [[
-  setlocal foldexpr=GetImportFold(v:lnum)
-  function! GetImportFold(lnum)
+  setlocal foldexpr=GetFoldLevel(v:lnum)
+  function! GetFoldLevel(lnum)
     let current_line = getline(a:lnum)
     " If current line starts with import and no matter how ends
     " then it's import to fold
@@ -84,5 +84,14 @@ vim.cmd [[
     endif
 
     return '0'
+  endfunction
+
+  setlocal foldtext=GetFoldText()
+  function! GetFoldText()
+    let fold_start = getline(v:foldstart)
+    if fold_start =~? '^import.*$'
+      return 'import ···'
+    endif
+    return foldtext()
   endfunction
 ]]
