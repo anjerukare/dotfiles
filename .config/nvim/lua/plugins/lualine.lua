@@ -10,7 +10,7 @@ require('lualine').setup {
     section_separators = '',
     component_separators = '|',
     icons_enabled = false,
-    disabled_filetypes = { 'NvimTree' }
+    disabled_filetypes = { 'nnn' }
   },
   sections = {
     lualine_b = {
