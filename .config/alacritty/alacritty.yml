@@ -37,6 +37,8 @@ key_bindings:
   # Insert
   - { key: T, mode: Vi|~Search, action: ToggleViMode }
   - { key: T, mode: Vi|~Search, action: ScrollToBottom }
+  - { key: Q, mode: Vi|~Search, action: ToggleViMode }
+  - { key: Q, mode: Vi|~Search, action: ScrollToBottom }
   # Semantic word end, word end
   - { key: K, mode: Vi|~Search, action: SemanticRightEnd }
   - { key: K, mods: Shift, mode: Vi|~Search, action: WordRightEnd }
