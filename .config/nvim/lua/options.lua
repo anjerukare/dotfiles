@@ -12,8 +12,8 @@ vim.opt.clipboard = 'unnamedplus' -- use system clipboard
 vim.opt.number = true -- show line numbers
 vim.opt.cursorline = true -- highlight cursor line
 vim.opt.signcolumn = 'number' -- show signs instead of line number
-vim.opt.fcs = 'eob: ' -- hide ~'s at the end of buffer
-vim.opt.fillchars = 'fold: ' -- hide ·'s at the end of folding
+vim.opt.fillchars = 'eob: ,fold: ' -- hide ~'s at the end of buffer
+                                   -- and hide ·'s at the end of folding
 vim.opt.showtabline = 2 -- show tabline always
 vim.opt.pumheight = 10 -- maximum number of items to show in the popup menu
 
