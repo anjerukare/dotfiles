@@ -22,6 +22,12 @@ colors:
   primary:
     background: '#0f0708'
     foreground: '#d0cccd'
+  selection:
+    background: '#d75f87'
+    text: '#c6c6c6'
+
+cursor:
+  vi_mode_style: Block
 
 shell:
   program: /usr/bin/zsh
