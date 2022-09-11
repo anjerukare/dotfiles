@@ -69,6 +69,7 @@ return require('packer').startup(function(use)
 
   -- Languages & frameworks plugins
   use 'neovim/nvim-lspconfig'
+  use 'mfussenegger/nvim-dap'
   use 'dart-lang/dart-vim-plugin'
   use {
     'akinsho/flutter-tools.nvim',
