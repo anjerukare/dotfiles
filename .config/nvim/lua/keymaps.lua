@@ -22,6 +22,11 @@ vim.keymap.set('n', 'T', 'I', { silent = true })
 -- Till
 vim.keymap.set({ 'n', 'v' }, 'l', 't', { silent = true })
 vim.keymap.set({ 'n', 'v' }, 'L', 'T', { silent = true })
+-- Combinations
+vim.keymap.set('n', 'cl', 'ct', { silent = true })
+vim.keymap.set('n', 'dl', 'dt', { silent = true })
+vim.keymap.set('n', 'vl', 'vt', { silent = true })
+vim.keymap.set('n', 'yl', 'yt', { silent = true })
 
 -- Semantic end of word, end of word
 vim.keymap.set({ 'n', 'x', 'o' }, 'k', 'e', { silent = true })
@@ -50,10 +55,6 @@ vim.keymap.set('n', 'ci', 'ci', { silent = true })
 vim.keymap.set('n', 'di', 'di', { silent = true })
 vim.keymap.set('n', 'vi', 'vi', { silent = true })
 vim.keymap.set('n', 'yi', 'yi', { silent = true })
-vim.keymap.set('n', 'ct', 'ct', { silent = true })
-vim.keymap.set('n', 'dt', 'dt', { silent = true })
-vim.keymap.set('n', 'vt', 'vt', { silent = true })
-vim.keymap.set('n', 'yt', 'yt', { silent = true })
 
 -- Handy esc
 vim.keymap.set('i', 'ii', '<Esc>', { silent = true })
