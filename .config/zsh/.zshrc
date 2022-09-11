@@ -32,7 +32,16 @@ function zsh_add_plugin() {
 ### Vi mode
 bindkey -v
 # Delete characters with <Backspace> no matter when they were inserted
-bindkey '^?' backward-delete-char
+bindkey -M viins '^?' backward-delete-char
+# Delete words with <c-W> no matter when they were inserted
+backward-kill-semantic-word() {
+  # TODO find the way to kill word like it does vi-backward-kill-word
+  # e.g. for 'mvn clean package -DskipTests=true' behavior differs
+  local WORDCHARS=''
+  zle backward-kill-word
+}
+zle -N backward-kill-semantic-word
+bindkey -M viins '^w' backward-kill-semantic-word
 
 # Left, down, up, right
 bindkey -M vicmd 'm' vi-backward-char
