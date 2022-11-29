@@ -12,10 +12,7 @@ require('lspconfig').lemminx.setup {
   on_attach = defaults.on_attach
 }
 
--- copied from .ghcup/env
-append_path(home_dir .. '/.cabal/bin')
-append_path(home_dir .. '/.ghcup/bin')
-require('lspconfig').hls.setup {
+require('lspconfig').emmet_ls.setup {
   capabilities = defaults.capabilities,
   on_attach = defaults.on_attach
 }
