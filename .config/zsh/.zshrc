@@ -143,7 +143,7 @@ local copy_widgets=(
     vi-yank vi-yank-eol vi-delete vi-backward-kill-word vi-change-whole-line
 )
 local paste_widgets=(
-    vi-put-{before,after}
+    vi-put-{before,after} put-replace-selection
 )
 
 xsel-wrap-widgets copy $copy_widgets
@@ -171,7 +171,8 @@ export NNN_OPTS='eR'
 export NNN_COLORS='#a8a8a8a8'
 export NNN_FCOLORS='a8a8a8fbfbfbfbfbfbfbfbfb'
 export NNN_FIFO='/tmp/nnn.fifo'
-export NNN_PLUG='f:autojump'
+export NNN_TRASH=2
+export NNN_PLUG='f:autojump;d:dragdrop'
 eval "$(jump shell zsh --bind=f)"
 t ()
 {
