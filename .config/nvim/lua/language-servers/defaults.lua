@@ -6,7 +6,7 @@ M.capabilities = require('cmp_nvim_lsp').update_capabilities(M.capabilities)
 
 M.on_attach = function()
   -- Keymaps
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, { silent = true })
+  vim.keymap.set('n', 'M', vim.lsp.buf.hover, { silent = true })
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { silent = true })
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { silent = true })
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { silent = true })

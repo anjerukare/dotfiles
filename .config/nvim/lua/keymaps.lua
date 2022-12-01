@@ -4,9 +4,6 @@ vim.g.mapleader = ','
 -- Easy quit from command-line
 vim.keymap.set('c', ':', '<C-c>', { silent = true })
 
--- Clear highlights
-vim.keymap.set('n', '<leader>h', '<cmd>nohlsearch<CR>', { silent = true })
-
 --- Colemak
 -- Left, down, up, right
 -- Note that 'g' is used for moving through wrapped line
@@ -31,6 +28,9 @@ vim.keymap.set('n', 'yl', 'yt', { silent = true })
 -- Semantic end of word, end of word
 vim.keymap.set({ 'n', 'x', 'o' }, 'k', 'e', { silent = true })
 vim.keymap.set({ 'n', 'x', 'o' }, 'K', 'E', { silent = true })
+
+-- Open man page for the word under cursor
+vim.keymap.set({ 'n', 'x', 'o' }, 'M', 'K', { silent = true })
 
 -- Next match, previous match
 vim.keymap.set({ 'n', 'x', 'o' }, 'h', 'n', { silent = true })
