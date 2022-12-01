@@ -34,7 +34,7 @@ shell:
 
 key_bindings:
   ## Vi mode
-  - { key: I, mods: Control, mode: ~Search, action: ToggleViMode }
+  - { key: I, mods: Alt, mode: ~Search, action: ToggleViMode }
   # Left, down, up, right
   - { key: M, mode: Vi|~Search, action: Left }
   - { key: N, mode: Vi|~Search, action: Down }
