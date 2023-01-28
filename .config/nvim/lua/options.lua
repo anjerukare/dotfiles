@@ -27,6 +27,7 @@ vim.opt.spelloptions = 'camel' -- every upper-cased character in word indicates
 -- Navigation
 vim.opt.scrolloff = 5 -- minimal number of lines above and below cursor
 vim.opt.splitright = true -- put new window right of current then :vsplit
+vim.opt.diffopt:append { 'vertical' } -- open diffs in vertical split
 
 -- Tabs
 vim.opt.tabstop = 2 -- how many columns use to display \t

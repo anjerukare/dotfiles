@@ -66,6 +66,10 @@ return require('packer').startup(function(use)
     'nanozuki/tabby.nvim',
     config = function() require 'plugins.tabline' end
   }
+  use {
+    'tpope/vim-fugitive',
+    config = function() require 'plugins.fugitive' end
+  }
   use 'rktjmp/lush.nvim'
   use '~/.config/nvim/redhead'
 
