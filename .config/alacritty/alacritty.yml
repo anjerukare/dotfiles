@@ -13,8 +13,8 @@ window:
 
 font:
   normal:
-    family: Ubuntu Mono
-  size: 13
+    family: JetBrains Mono
+  size: 10
   offset:
     y: 3
 
