@@ -74,10 +74,6 @@ require('telescope').setup {
   }
 }
 
--- Highlights
-vim.cmd 'highlight! link TelescopeBorder FloatBorder'
-vim.cmd 'highlight! link TelescopeTitle Normal'
-
 --- Extensions
 -- Fzf sorter for telescope
 require('telescope').load_extension('fzf')

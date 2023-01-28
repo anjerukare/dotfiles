@@ -2,11 +2,9 @@
 vim.opt.showmode = false
 
 -- Lualine setup
-local transpink = require('plugins.lualine.themes.transpink')
-
 require('lualine').setup {
   options = {
-    theme = transpink,
+    theme = require('lualine.themes.redhead'),
     section_separators = '',
     component_separators = '|',
     icons_enabled = false,

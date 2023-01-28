@@ -66,6 +66,8 @@ return require('packer').startup(function(use)
     'nanozuki/tabby.nvim',
     config = function() require 'plugins.tabline' end
   }
+  use 'rktjmp/lush.nvim'
+  use '~/.config/nvim/redhead'
 
   -- Languages & frameworks plugins
   use 'neovim/nvim-lspconfig'

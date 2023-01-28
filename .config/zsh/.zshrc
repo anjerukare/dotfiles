@@ -5,7 +5,7 @@ setopt menucomplete
 # Disable Ctrl-S to freeze terminal
 stty stop undef
 # Disable highlight on pasted text and add highlight on selection
-zle_highlight=('paste:none', 'region:bg=168,fg=251')
+zle_highlight=('paste:none', 'region:bg=red,fg=white')
 # Initialize autocompletion
 autoload -Uz compinit
 compinit
@@ -164,12 +164,12 @@ export PAGER='less'
 alias v='nvim'
 
 ## Prompt
-PROMPT='%F{251}%B%n@%m%f %F{168}%~%b%f %# '
+PROMPT='%F{white}%B%n@%m%f %F{green}%~%b%f %F{red}%#%f '
 
 ## Nnn configuration
 export NNN_OPTS='eR'
-export NNN_COLORS='#a8a8a8a8'
-export NNN_FCOLORS='a8a8a8fbfbfbfbfbfbfbfbfb'
+export NNN_COLORS='1111'
+export NNN_FCOLORS='020202070707070707070707'
 export NNN_FIFO='/tmp/nnn.fifo'
 export NNN_TRASH=2
 export NNN_PLUG='f:autojump;d:dragdrop'

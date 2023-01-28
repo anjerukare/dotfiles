@@ -20,11 +20,15 @@ font:
 
 colors:
   primary:
-    background: '#0f0708'
-    foreground: '#d0cccd'
+    background: '#010a06'
+    foreground: '#cde1da'
   selection:
-    background: '#d75f87'
-    text: '#c6c6c6'
+    background: '#e25a3f'
+    text: '#cde1da'
+  normal:
+    red: '#e25a3f'
+    green: '#0c8e52'
+    white: '#cde1da'
 
 cursor:
   vi_mode_style: Block
