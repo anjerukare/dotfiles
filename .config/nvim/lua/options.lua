@@ -17,6 +17,7 @@ vim.opt.fillchars = 'eob: ,fold: ' -- hide ~'s at the end of buffer
 vim.opt.showtabline = 2 -- show tabline always
 vim.opt.pumheight = 10 -- maximum number of items to show in the popup menu
 vim.opt.cmdheight = 0 -- show command line at the bottom only when it necessary
+vim.opt.laststatus = 3 -- enable global status line
 
 -- Spelling
 vim.opt.spell = true -- enable spell checking
