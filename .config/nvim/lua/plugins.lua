@@ -66,6 +66,10 @@ return require('packer').startup(function(use)
     'nanozuki/tabby.nvim',
     config = function() require 'plugins.tabline' end
   }
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function() require 'plugins.gitsigns' end
+  }
 
   -- Languages & frameworks plugins
   use 'neovim/nvim-lspconfig'
