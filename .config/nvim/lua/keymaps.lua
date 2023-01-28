@@ -1,9 +1,6 @@
 -- Set leader key
 vim.g.mapleader = ','
 
--- Easy quit from command-line
-vim.keymap.set('c', ':', '<C-c>', { silent = true })
-
 --- Colemak
 -- Left, down, up, right
 -- Note that 'g' is used for moving through wrapped line
@@ -14,7 +11,7 @@ vim.keymap.set({ 'n', 'x', 'o' }, 'i', 'l', { silent = true })
 
 -- Insert and insert at beginning of line
 vim.keymap.set('n', 't', 'i', { silent = true })
-vim.keymap.set('n', 'T', 'I', { silent = true })
+vim.keymap.set({ 'n', 'v' }, 'T', 'I', { silent = true })
 
 -- Till
 vim.keymap.set({ 'n', 'v' }, 'l', 't', { silent = true })

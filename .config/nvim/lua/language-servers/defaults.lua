@@ -10,8 +10,7 @@ M.on_attach = function()
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { silent = true })
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { silent = true })
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { silent = true })
-  vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, { silent = true })
-  vim.keymap.set('x', '<leader>a', vim.lsp.buf.range_code_action,
+  vim.keymap.set({ 'n', 'x' }, '<leader>a', vim.lsp.buf.code_action,
     { silent = true })
   vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { silent = true })
   -- Set keymaps for moving to through diagnostics
