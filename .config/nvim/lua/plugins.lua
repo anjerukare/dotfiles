@@ -83,6 +83,10 @@ return require('packer').startup(function(use)
     config = function() require 'plugins.flutter-tools' end
   }
   use 'mfussenegger/nvim-jdtls'
+  use {
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end
+  }
 
   -- Autocompletion
   use {

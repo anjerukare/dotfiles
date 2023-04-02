@@ -16,3 +16,27 @@ require('lspconfig').emmet_ls.setup {
   capabilities = defaults.capabilities,
   on_attach = defaults.on_attach
 }
+
+append_path(lsp_dir .. '/sumnekolua/bin')
+require('lspconfig').sumneko_lua.setup {
+  capabilities = defaults.capabilities,
+  on_attach = defaults.on_attach,
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
