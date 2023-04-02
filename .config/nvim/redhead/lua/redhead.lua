@@ -104,13 +104,13 @@ local theme = lush(function(injected_functions)
     -- Boolean        { }, --   A boolean constant: TRUE, false
     -- Float          { }, --   A floating point constant: 2.3e10
 
-    Identifier     { fg = colors.greeny }, -- (*) Any variable name
-    -- Function       { }, --   Function name (also: methods for classes)
+    Identifier     { fg = colors.white }, -- (*) Any variable name
+    Function       { fg = colors.greeny }, --   Function name (also: methods for classes)
 
     Statement      { fg = colors.green }, -- (*) Any statement
     -- Conditional    { }, --   if, then, else, endif, switch, etc.
     -- Repeat         { }, --   for, do, while, etc.
-    -- Label          { }, --   case, default, etc.
+    Label          { }, --   case, default, etc.
     -- Operator       { }, --   "sizeof", "+", "*", etc.
     -- Keyword        { }, --   any other keyword
     -- Exception      { }, --   try, catch, throw
@@ -121,7 +121,7 @@ local theme = lush(function(injected_functions)
     -- Macro          { }, --   Same as Define
     -- PreCondit      { }, --   Preprocessor #if, #else, #endif, etc.
 
-    Type           { bold = true }, -- (*) int, long, char, etc.
+    Type           { fg = colors.white, bold = true }, -- (*) int, long, char, etc.
     StorageClass   { fg = colors.green }, --   static, register, volatile, etc.
     Structure      { }, --   struct, union, enum, etc.
     Typedef        { fg = colors.green }, --   A typedef
