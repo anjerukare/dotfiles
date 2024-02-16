@@ -13,10 +13,12 @@ window:
 
 font:
   normal:
-    family: JetBrains Mono
-  size: 10
+    family: JetBrainsMono Nerd Font
+  bold:
+    family: JetBrainsMono Nerd Font
+  size: 14
   offset:
-    y: 3
+    y: 4
 
 colors:
   primary:
