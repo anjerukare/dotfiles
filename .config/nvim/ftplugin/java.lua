@@ -1,11 +1,12 @@
 -- Setup jdtls
 local defaults = require('language-servers.defaults')
-local jdtls_home = vim.fn.expand('~/.local/share/nvim/lsp/jdtls')
+local mason_path = require('mason-core.path')
+local jdtls_home = mason_path.package_prefix('jdtls')
 local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
 require('jdtls').start_or_attach {
   cmd = {
-    '/usr/lib/jvm/java-17-openjdk-amd64/bin/java',
+    vim.fn.glob('$JAVA_HOME/bin/java'),
     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
     '-Dosgi.bundles.defaultStartLevel=4',
     '-Declipse.product=org.eclipse.jdt.ls.core.product',

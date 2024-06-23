@@ -83,6 +83,14 @@ return require('packer').startup(function(use)
 
   -- Languages & frameworks plugins
   use 'neovim/nvim-lspconfig'
+  use {
+    'williamboman/mason.nvim',
+    config = function() require('mason').setup() end
+  }
+  use {
+    'williamboman/mason-lspconfig.nvim',
+    config = function() require('mason-lspconfig').setup() end
+  }
   use 'mfussenegger/nvim-dap'
   use {
     'akinsho/flutter-tools.nvim',
