@@ -150,7 +150,8 @@ xsel-wrap-widgets copy $copy_widgets
 xsel-wrap-widgets paste $paste_widgets
 
 ## Plugins
-# goes here
+zsh_add_plugin "gradle/gradle-completion"
+fpath=($ZDOTDIR/plugins/gradle-completion $fpath)
 
 ## Exports
 HISTFILE="$HOME/.local/share/zsh/history"
