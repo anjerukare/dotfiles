@@ -1,8 +1,6 @@
 local M = {}
 
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities.textDocument.completion.completionItem.snippetSupport = false
-M.capabilities = require('cmp_nvim_lsp').update_capabilities(M.capabilities)
+M.capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 M.on_attach = function()
   -- Keymaps
@@ -12,11 +10,12 @@ M.on_attach = function()
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { silent = true })
   vim.keymap.set({ 'n', 'x' }, '<leader>a', vim.lsp.buf.code_action,
     { silent = true })
-  vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { silent = true })
+  vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, { silent = true })
+  vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help, { silent = true })
   -- Set keymaps for moving to through diagnostics
   vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { silent = true })
   vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { silent = true })
-  
+
   -- Show diagnostic float window on hover
   vim.api.nvim_create_autocmd("CursorHold", {
     buffer = bufnr,
@@ -35,7 +34,7 @@ M.on_attach = function()
   })
   -- Set time that affects CursorHold event
   vim.opt.updatetime = 500
-  
+
   -- Disable virtual-text of diagnostic messages
   vim.diagnostic.config({ virtual_text = false })
 
@@ -77,6 +76,12 @@ M.on_attach = function()
   -- Configuration for documentation float window
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
     vim.lsp.handlers.hover,
+    { border = 'single', max_height = 16 }
+  )
+
+  -- Configuration for signature help float window
+  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+    vim.lsp.handlers.signature_help,
     { border = 'single', max_height = 16 }
   )
 end
