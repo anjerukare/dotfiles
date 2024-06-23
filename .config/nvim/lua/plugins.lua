@@ -1,6 +1,6 @@
 -- Automatically install packer
 local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system {
     'git', 'clone', '--depth', '1',
@@ -11,8 +11,8 @@ end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.api.nvim_create_autocmd('BufWritePost', {
-    pattern = 'plugins.lua',
-    command = 'source <afile> | PackerCompile'
+  pattern = 'plugins.lua',
+  command = 'source <afile> | PackerCompile'
 })
 
 -- Use a protected call so we don't error out on first use
@@ -35,6 +35,14 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- Utility and appearance plugins
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end,
+    config = function() require('plugins.treesitter') end
+  }
   use {
     'luukvbaal/nnn.nvim',
     config = function() require 'plugins.nnn' end
@@ -76,7 +84,6 @@ return require('packer').startup(function(use)
   -- Languages & frameworks plugins
   use 'neovim/nvim-lspconfig'
   use 'mfussenegger/nvim-dap'
-  use 'dart-lang/dart-vim-plugin'
   use {
     'akinsho/flutter-tools.nvim',
     requires = 'nvim-lua/plenary.nvim',
