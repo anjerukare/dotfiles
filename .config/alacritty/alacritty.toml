@@ -1,0 +1,113 @@
+[env]
+TERM = "alacritty"
+
+[shell]
+program = "/usr/bin/zsh"
+
+[window]
+decorations = "none"
+opacity = 0.9
+
+[window.dimensions]
+columns = 85
+lines = 22
+
+[window.padding]
+x = 10
+y = 10
+
+[font]
+size = 14
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+
+[font.offset]
+y = 4
+
+[colors.normal]
+red = "#e25a3f"
+green = "#0c8e52"
+white = "#cde1da"
+
+[colors.primary]
+background = "#010a06"
+foreground = "#cde1da"
+
+[colors.selection]
+background = "#e25a3f"
+text = "#cde1da"
+
+[cursor]
+vi_mode_style = "Block"
+
+[[keyboard.bindings]]
+key = "I"
+mods = "Alt"
+mode = "~Search"
+action = "ToggleViMode"
+
+[[keyboard.bindings]]
+key = "M"
+mode = "Vi|~Search"
+action = "Left"
+
+[[keyboard.bindings]]
+key = "N"
+mode = "Vi|~Search"
+action = "Down"
+
+[[keyboard.bindings]]
+key = "E"
+mode = "Vi|~Search"
+action = "Up"
+
+[[keyboard.bindings]]
+key = "I"
+mode = "Vi|~Search"
+action = "Right"
+
+[[keyboard.bindings]]
+key = "T"
+mode = "Vi|~Search"
+action = "ToggleViMode"
+
+[[keyboard.bindings]]
+key = "T"
+mode = "Vi|~Search"
+action = "ScrollToBottom"
+
+[[keyboard.bindings]]
+key = "Q"
+mode = "Vi|~Search"
+action = "ToggleViMode"
+
+[[keyboard.bindings]]
+key = "Q"
+mode = "Vi|~Search"
+action = "ScrollToBottom"
+
+[[keyboard.bindings]]
+key = "K"
+mode = "Vi|~Search"
+action = "SemanticRightEnd"
+
+[[keyboard.bindings]]
+key = "K"
+mods = "Shift"
+mode = "Vi|~Search"
+action = "WordRightEnd"
+
+[[keyboard.bindings]]
+key = "H"
+mode = "Vi|~Search"
+action = "SearchNext"
+
+[[keyboard.bindings]]
+key = "H"
+mods = "Shift"
+mode = "Vi|~Search"
+action = "SearchPrevious"
