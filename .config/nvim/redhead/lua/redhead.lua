@@ -34,13 +34,18 @@ local theme = lush(function(injected_functions)
     Normal       { fg = colors.white }, -- Normal text
     Cursor       { reverse = true }, -- Character under the cursor
     LineNr       { fg = colors.grey }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+    LineNrAbove    { LineNr }, -- Line number for when the 'relativenumber' option is set, above the cursor line
+    LineNrBelow    { LineNr }, -- Line number for when the 'relativenumber' option is set, below the cursor line
     CursorLine { }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
     CursorLineNr { fg = colors.reddish }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
+    CursorLineFold { LineNr }, -- Like FoldColumn when 'cursorline' is set for the cursor line
+    CursorLineSign { }, -- Like SignColumn when 'cursorline' is set for the cursor line
     Visual       { fg = colors.white, bg = colors.reddish }, -- Visual mode selection
     VisualNOS    { Visual }, -- Visual mode selection when vim is "Not Owning the Selection".
     MatchParen   { fg = colors.white, bg = colors.reddish }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     Search       { fg = colors.white, bg = colors.dark_reddish }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
     IncSearch    { fg = colors.white, bg = colors.reddish }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
+    CurSearch      { fg = colors.white, bg = colors.reddish }, -- Highlighting a search pattern under the cursor (see 'hlsearch')
 
     TabLine      { }, -- Tab pages line, not active tab page label
     TabLineFill  { }, -- Tab pages line, where there are no labels
@@ -53,11 +58,20 @@ local theme = lush(function(injected_functions)
 
     VertSplit    { fg = colors.dark_grey }, -- Column separating vertically split windows
     NormalFloat  { }, -- Normal text in floating windows.
+    FloatBorder  { VertSplit }, -- Border of floating windows.
+    FloatTitle   { }, -- Title of floating windows.
     Pmenu        { }, -- Popup menu: Normal item.
     PmenuSel     { fg = colors.white, bg = colors.reddish }, -- Popup menu: Selected item.
+    PmenuKind      { fg = colors.light_grey }, -- Popup menu: Normal item "kind"
+    PmenuKindSel   { PmenuSel }, -- Popup menu: Selected item "kind"
+    PmenuExtra     { PmenuKind }, -- Popup menu: Normal item "extra text"
+    PmenuExtraSel  { PmenuSel }, -- Popup menu: Selected item "extra text"
     PmenuSbar    { }, -- Popup menu: Scrollbar.
     PmenuThumb   { bg = colors.grey }, -- Popup menu: Thumb of the scrollbar.
     WildMenu     { PmenuSel }, -- Current match in 'wildmenu' completion
+    -- WinBar         { }, -- Window bar of current window
+    -- WinBarNC       { }, -- Window bar of not-current windows
+    WinSeparator  { VertSplit }, -- Separator between window splits
 
     Folded       { fg = colors.light_grey }, -- Line used for closed folds
     FoldColumn   { fg = colors.grey }, -- 'foldcolumn'
@@ -98,28 +112,28 @@ local theme = lush(function(injected_functions)
     Comment        { fg = colors.light_grey }, -- Any comment
 
     Constant       { fg = colors.reddish }, -- (*) Any constant
-    -- String         { }, --   A string constant: "this is a string"
-    -- Character      { }, --   A character constant: 'c', '\n'
-    -- Number         { }, --   A number constant: 234, 0xff
-    -- Boolean        { }, --   A boolean constant: TRUE, false
-    -- Float          { }, --   A floating point constant: 2.3e10
+    String         { Constant }, --   A string constant: "this is a string"
+    Character      { Constant }, --   A character constant: 'c', '\n'
+    Number         { Constant }, --   A number constant: 234, 0xff
+    Boolean        { Constant }, --   A boolean constant: TRUE, false
+    Float          { Constant }, --   A floating point constant: 2.3e10
 
     Identifier     { fg = colors.white }, -- (*) Any variable name
     Function       { fg = colors.greeny }, --   Function name (also: methods for classes)
 
     Statement      { fg = colors.green }, -- (*) Any statement
-    -- Conditional    { }, --   if, then, else, endif, switch, etc.
-    -- Repeat         { }, --   for, do, while, etc.
+    Conditional    { Statement }, --   if, then, else, endif, switch, etc.
+    Repeat         { Statement }, --   for, do, while, etc.
     Label          { }, --   case, default, etc.
-    -- Operator       { }, --   "sizeof", "+", "*", etc.
-    -- Keyword        { }, --   any other keyword
-    -- Exception      { }, --   try, catch, throw
+    Operator       { Statement }, --   "sizeof", "+", "*", etc.
+    Keyword        { Statement }, --   any other keyword
+    Exception      { Statement }, --   try, catch, throw
 
     PreProc        { fg = colors.light_grey }, -- (*) Generic Preprocessor
-    -- Include        { }, --   Preprocessor #include
-    -- Define         { }, --   Preprocessor #define
-    -- Macro          { }, --   Same as Define
-    -- PreCondit      { }, --   Preprocessor #if, #else, #endif, etc.
+    Include        { PreProc }, --   Preprocessor #include
+    Define         { PreProc }, --   Preprocessor #define
+    Macro          { PreProc }, --   Same as Define
+    PreCondit      { PreProc }, --   Preprocessor #if, #else, #endif, etc.
 
     Type           { fg = colors.white, bold = true }, -- (*) int, long, char, etc.
     StorageClass   { fg = colors.green }, --   static, register, volatile, etc.
@@ -127,14 +141,14 @@ local theme = lush(function(injected_functions)
     Typedef        { fg = colors.green }, --   A typedef
 
     Special        { fg = colors.light_grey }, -- (*) Any special symbol
-    -- SpecialChar    { }, --   Special character in a constant
-    -- Tag            { }, --   You can use CTRL-] on this
-    -- Delimiter      { }, --   Character that needs attention
-    -- SpecialComment { }, --   Special things inside a comment (e.g. '\n')
-    -- Debug          { }, --   Debugging statements
+    SpecialChar    { Special }, --   Special character in a constant
+    Tag            { Special }, --   You can use CTRL-] on this
+    Delimiter      { Special }, --   Character that needs attention
+    SpecialComment { Special }, --   Special things inside a comment (e.g. '\n')
+    Debug          { Special }, --   Debugging statements
 
     Underlined     { underline = true }, -- Text that stands out, HTML links
-    -- Ignore         { }, -- Left blank, hidden |hl-Ignore| (NOTE: May be invisible here in template)
+    Ignore         { fg = colors.light_grey }, -- Left blank, hidden |hl-Ignore| (NOTE: May be invisible here in template)
     Error          { fg = colors.reddish }, -- Any erroneous construct
     Todo           { fg = colors.reddish }, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
@@ -167,53 +181,53 @@ local theme = lush(function(injected_functions)
     -- See :h treesitter-highlight-groups, some groups may not be listed,
     -- submit a PR fix to lush-template!
 
-    -- sym"@text.literal"         { }, -- Comment
-    -- sym"@text.reference"       { }, -- Identifier
-    -- sym"@text.title"           { }, -- Title
-    -- sym"@text.uri"             { }, -- Underlined
-    -- sym"@text.underline"       { }, -- Underlined
-    -- sym"@text.todo"            { }, -- Todo
-    -- sym"@comment"              { }, -- Comment
-    sym"@punctuation"          { }, -- Delimiter
-    -- sym"@constant"             { }, -- Constant
-    -- sym"@constant.builtin"     { }, -- Special
-    -- sym"@constant.macro"       { }, -- Define
-    -- sym"@define"               { }, -- Define
-    -- sym"@macro"                { }, -- Macro
-    -- sym"@string"               { }, -- String
-    -- sym"@string.escape"        { }, -- SpecialChar
-    -- sym"@string.special"       { }, -- SpecialChar
-    -- sym"@character"            { }, -- Character
-    -- sym"@character.special"    { }, -- SpecialChar
-    -- sym"@number"               { }, -- Number
-    -- sym"@boolean"              { }, -- Boolean
-    -- sym"@float"                { }, -- Float
-    -- sym"@function"             { }, -- Function
-    -- sym"@function.builtin"     { }, -- Special
-    -- sym"@function.macro"       { }, -- Macro
-    -- sym"@parameter"            { }, -- Identifier
-    -- sym"@method"               { }, -- Function
-    -- sym"@field"                { }, -- Identifier
-    sym"@property"             { Function }, -- Identifier
-    -- sym"@constructor"          { }, -- Special
-    -- sym"@conditional"          { }, -- Conditional
-    -- sym"@repeat"               { }, -- Repeat
-    -- sym"@label"                { }, -- Label
-    -- sym"@operator"             { }, -- Operator
-    -- sym"@keyword"              { }, -- Keyword
-    -- sym"@exception"            { }, -- Exception
-    -- sym"@variable"             { }, -- Identifier
+    sym"@text.literal"         { Comment },
+    sym"@text.reference"       { Identifier },
+    sym"@text.title"           { Title },
+    sym"@text.uri"             { Underlined },
+    sym"@text.underline"       { Underlined },
+    sym"@text.todo"            { Todo },
+    sym"@comment"              { Comment },
+    sym"@punctuation"          { },
+    sym"@constant"             { Constant },
+    sym"@constant.builtin"     { Special },
+    sym"@constant.macro"       { Define },
+    sym"@define"               { Define },
+    sym"@macro"                { Macro },
+    sym"@string"               { String },
+    sym"@string.escape"        { SpecialChar },
+    sym"@string.special"       { SpecialChar },
+    sym"@character"            { Character },
+    sym"@character.special"    { SpecialChar },
+    sym"@number"               { Number },
+    sym"@boolean"              { Boolean },
+    sym"@float"                { Float },
+    sym"@function"             { Function },
+    sym"@function.builtin"     { Special },
+    sym"@function.macro"       { Macro },
+    sym"@parameter"            { Identifier },
+    sym"@method"               { Function },
+    sym"@field"                { Identifier },
+    sym"@property"             { Function },
+    sym"@constructor"          { Special },
+    sym"@conditional"          { Conditional },
+    sym"@repeat"               { Repeat },
+    sym"@label"                { Label },
+    sym"@operator"             { Operator },
+    sym"@keyword"              { Keyword },
+    sym"@exception"            { Exception },
+    sym"@variable"             { Identifier },
     sym"@variable.builtin"     { Statement },
-    -- sym"@type"                 { fg = colors.reddish }, -- Type
-    -- sym"@type.definition"      { }, -- Typedef
+    sym"@type"                 { Type },
+    sym"@type.definition"      { Typedef },
     sym"@type.qualifier"       { Typedef },
-    -- sym"@storageclass"         { }, -- StorageClass
-    -- sym"@structure"            { }, -- Structure
-    -- sym"@namespace"            { }, -- Identifier
-    -- sym"@include"              { }, -- Include
-    -- sym"@preproc"              { }, -- PreProc
-    -- sym"@debug"                { }, -- Debug
-    -- sym"@tag"                  { }, -- Tag
+    sym"@storageclass"         { StorageClass },
+    sym"@structure"            { Structure },
+    sym"@namespace"            { Identifier },
+    sym"@include"              { Include },
+    sym"@preproc"              { PreProc },
+    sym"@debug"                { Debug },
+    sym"@tag"                  { Tag },
     sym"@attribute"            { Special },
 
     -- Language specific
