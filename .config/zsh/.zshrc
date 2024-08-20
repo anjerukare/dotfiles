@@ -167,37 +167,12 @@ alias v='nvim'
 ## Prompt
 PROMPT='%F{white}%B%n@%m%f %F{green}%~%b%f %F{red}%#%f '
 
-## Nnn configuration
-export NNN_OPTS='eR'
-export NNN_COLORS='1111'
-export NNN_FCOLORS='020202070707070707070707'
-export NNN_FIFO='/tmp/nnn.fifo'
-export NNN_TRASH=2
-export NNN_PLUG='f:autojump;d:dragdrop'
-eval "$(jump shell zsh --bind=f)"
-t ()
-{
-    # Block nesting of nnn in subshells
-    [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ] && exit &> /dev/null
-
-    # The behaviour is set to cd on quit (nnn checks if NNN_TMPFILE is set)
-    # If NNN_TMPFILE is set to a custom path, it must be exported for nnn to
-    # see. To cd on quit only on ^G, remove the "export" and make sure not to
-    # use a custom path, i.e. set NNN_TMPFILE *exactly* as follows:
-    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-
-    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
-    # stty start undef
-    # stty stop undef
-    # stty lwrap undef
-    # stty lnext undef
-
-    nnn "$@"
-
-    if [ -f "$NNN_TMPFILE" ]; then
-            . "$NNN_TMPFILE"
-            rm -f "$NNN_TMPFILE" > /dev/null
-    fi
+function t() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
 }
 

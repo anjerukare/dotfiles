@@ -44,8 +44,9 @@ return require('packer').startup(function(use)
     config = function() require('plugins.treesitter') end
   }
   use {
-    'luukvbaal/nnn.nvim',
-    config = function() require 'plugins.nnn' end
+    'mikavilpas/yazi.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function() require('plugins.yazi') end
   }
   use {
     'nvim-telescope/telescope.nvim',
