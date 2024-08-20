@@ -1,0 +1,60 @@
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+[manager]
+prepend_keymap = [
+  { on = [ "<C-l>" ], run = "escape --find", desc = "Cancel find" },
+  { on = [ "m" ], run = "leave", desc = "Go back to the parent directory" },
+  { on = [ "n" ], run = "arrow 1", desc = "Move cursor down" },
+  { on = [ "e" ], run = "arrow -1", desc = "Move cursor up" },
+  { on = [ "i" ], run = "enter", desc = "Enter the child directory" },
+  { on = [ "<C-d>" ], run = "seek 2", desc = "Seek down 2 units in the preview" },
+  { on = [ "<C-u>" ], run = "seek -2", desc = "Seek up 2 units in the preview" },
+  { on = [ "g", "/" ], run = "cd /", desc = "Go to the root directory" },
+  { on = [ "h" ], run = "find_arrow", desc = "Move the cursor to the next occurence" },
+  { on = [ "H" ], run = "find_arrow --previous", desc = "Move the cursor to the previous occurence" },
+  { on = [ "d", "d" ], run = "remove --force", desc = "Trash selected files" },
+
+  { on = [ "d", "r" ], run = ['''
+      shell --confirm 'dragon "$@" --all-compact --on-top --and-exit'
+  ''', "escape --select"], desc = "Drag selected files" },
+
+  { on = [ "b", "s" ], run = "plugin bookmarks --args=save", desc = "Save current position as a bookmark" },
+  { on = [ "'" ], run = "plugin bookmarks --args=jump", desc = "Jump to a bookmark" },
+  { on = [ "b", "d" ], run = "plugin bookmarks --args=delete", desc = "Delete a bookmark" },
+]
+
+[tasks]
+prepend_keymap = [
+  { on = [ "q" ], run = "close", desc = "Hide the task manager" },
+  { on = [ "n" ], run = "arrow 1", desc = "Move cursor down" },
+  { on = [ "e" ], run = "arrow -1", desc = "Move cursor up" },
+]
+
+[select] # what is select?
+prepend_keymap = [
+  { on = [ "n" ], run = "arrow 1", desc = "Move cursor down" },
+  { on = [ "e" ], run = "arrow -1", desc = "Move cursor up" },
+]
+
+[input]
+prepend_keymap = [
+  { on = [ "q" ], run = "close", desc = "Cancel the input" },
+  { on = [ "m" ], run = "move -1", desc = "Move the cursor left" },
+  { on = [ "i" ], run = "move 1", desc = "Move the cursor right" },
+  { on = [ "k" ], run = "forward --end-of-word", desc = "Move forward to the end of the current or next word" },
+  { on = [ "t" ], run = "insert", desc = "Enter the insert mode" },
+]
+
+[completion]
+prepend_keymap = [
+  { on = [ "q" ], run = "close_input", desc = "Cancel the input" },
+  { on = [ "n" ], run = "arrow 1", desc = "Move cursor down" },
+  { on = [ "e" ], run = "arrow -1", desc = "Move cursor up" },
+]
+
+[help]
+prepend_keymap = [
+  { on = [ "q" ], run = "close", desc = "Hide the help menu" },
+  { on = [ "n" ], run = "arrow 1", desc = "Move cursor down" },
+  { on = [ "e" ], run = "arrow -1", desc = "Move cursor up" },
+]

@@ -1,0 +1,97 @@
+"$schema" = "https://yazi-rs.github.io/schemas/theme.json"
+
+[manager]
+cwd = { fg = "red" }
+
+hovered = { reversed = true }
+preview_hovered = { }
+
+find_keyword = { reversed = true, fg = "#9d3d29", bg = "#cde1da" }
+find_position = { fg = "#9d3d29", bg = "#cde1da" }
+
+marker_selected = { bg = "#cde1da", fg = "#cde1da" }
+marker_copied = { bg = "red", fg = "red"}
+marker_cut = { bg = "red", fg = "red"}
+
+tab_active = { fg = "red" }
+tab_inactive = { fg = "#cde1da" }
+
+border_style = { fg = "#2a2f2d" }
+
+[filetype]
+rules = [
+	{ name = "*/", fg = "green", bold = true },
+  { name = "*", fg = "#cde1da" }
+]
+
+[status]
+separator_open = ""
+separator_close = ""
+separator_style = { bg = "reset", fg = "reset" }
+
+# mod configuration is extremely inflexible right now
+# wanna do the hovered size, hovered name and current position to be "#6c7773"
+mode_normal = { bg = "reset", fg = "red" }
+mode_select = { bg = "reset", fg = "red" }
+mode_unset = { bg = "reset", fg = "red" }
+
+# something wrong here
+progress_label = {  }
+progress_normal = { bg = "#cde1da", fg = "reset" }
+progress_error = { bg = "red", fg = "reset" }
+
+permissions_t = { fg = "red" }
+permissions_r = { fg = "red" }
+permissions_w = { fg = "red" }
+permissions_x = { fg = "red" }
+permissions_s = { fg = "#6c7773" }
+
+[select] # what is select?
+border = { fg = "#2a2f2d" }
+# active = {  }
+
+[input]
+border = { fg = "#2a2f2d" }
+title = { fg = "#cde1da" }
+value = { fg = "#cde1da" }
+
+[completion]
+border = { fg = "#2a2f2d" }
+
+icon_folder = ""
+icon_file = ""
+icon_command = ""
+
+[tasks]
+border = { fg = "#2a2f2d" }
+title = { fg = "#cde1da" }
+hovered = { reversed = true }
+
+[which]
+mask = {  }
+cand = { fg = "red" }
+desc = { fg = "#6c7773" }
+separator_style = { fg = "#6c7773" }
+
+[help]
+on = { fg = "#cde1da" }
+run = { fg = "#cde1da" }
+desc = { fg = "#6c7773" }
+hovered = { reversed = true }
+footer = { fg = "#6c7773" }
+
+[notify]
+title_info = { fg = "#6c7773" }
+title_warn = { fg = "#6c7773" }
+title_error = { fg = "red" }
+
+icon_info = ""
+icon_warn = ""
+icon_error = ""
+
+[icon]
+globs = []
+dirs = []
+files = []
+exts = []
+conds = []
